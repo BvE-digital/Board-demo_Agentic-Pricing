@@ -36,20 +36,34 @@ board-showcase spec this demo is built against.
 
 - **Node 18+** and **npm**
 
-## Run locally
+## Run it — three ways
+
+### 1. Standalone file (no Node, no server — easiest)
+
+A pre-built, fully self-contained copy lives at
+[`standalone/nutreco-demo.html`](standalone/nutreco-demo.html). Everything — the
+app, styles and fonts — is inlined into that one file.
+
+- **Double-click it** (or drag it into Chrome/Edge) to run it straight from
+  disk over `file://`. No install, works offline.
+- Or serve the folder on localhost with any static server, e.g.
+  `npx serve standalone` or `python3 -m http.server` then open the file.
+
+This is the recommended way to run the demo on a board laptop. To regenerate it
+after changing the source, run `npm run standalone`.
+
+### 2. Dev server (live reload, for editing)
 
 ```bash
 npm install
-npm run dev
+npm run dev        # → http://localhost:5173
 ```
 
-Opens at **http://localhost:5173**.
-
-## Production build
+### 3. Production build / preview
 
 ```bash
-npm run build      # outputs to /dist
-npm run preview    # serve the built /dist locally to sanity-check
+npm run build      # → single self-contained /dist/index.html
+npm run preview    # serve the built file locally to sanity-check (→ :4173)
 ```
 
 ---

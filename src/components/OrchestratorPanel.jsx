@@ -14,6 +14,7 @@ export default function OrchestratorPanel({
   agents,
   summary,
   summaryWordCount,
+  collapsed = false,
 }) {
   const [typed, setTyped] = useState('');
 
@@ -34,7 +35,7 @@ export default function OrchestratorPanel({
   const summaryDone = summaryWordCount >= summary.split(' ').length;
 
   return (
-    <section className="orchestrator">
+    <section className={collapsed ? 'orchestrator collapsed' : 'orchestrator'}>
       <ProgressBar progress={progress} />
 
       <div className="orch-inner">

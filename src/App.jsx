@@ -23,6 +23,10 @@ export default function App() {
   const [converged, setConverged] = useState(false);
   const [summaryWordCount, setSummaryWordCount] = useState(0);
   const [showTable, setShowTable] = useState(false);
+  // Post-run view controls: fold the navy "today's update" band and/or the
+  // agent summaries away so the results table can fill (more of) the screen.
+  const [orchCollapsed, setOrchCollapsed] = useState(false);
+  const [agentsCollapsed, setAgentsCollapsed] = useState(false);
   const cleanupRef = useRef(null);
 
   const patchAgent = (id, patch) =>
@@ -64,6 +68,8 @@ export default function App() {
     setConverged(false);
     setSummaryWordCount(0);
     setShowTable(false);
+    setOrchCollapsed(false);
+    setAgentsCollapsed(false);
   }, []);
 
   if (view === 'chat') {
@@ -80,9 +86,21 @@ export default function App() {
         agents={agents}
         summary={ORCHESTRATOR_SUMMARY}
         summaryWordCount={summaryWordCount}
+        collapsed={showTable && orchCollapsed}
       />
-      <AgentRow agents={agents} converged={converged} />
-      <ResultsTable rows={ingredients} visible={showTable} />
+      <AgentRow
+        agents={agents}
+        converged={converged}
+        collapsed={showTable && agentsCollapsed}
+      />
+      <ResultsTable
+        rows={ingredients}
+        visible={showTable}
+        orchCollapsed={orchCollapsed}
+        agentsCollapsed={agentsCollapsed}
+        onToggleOrch={() => setOrchCollapsed((v) => !v)}
+        onToggleAgents={() => setAgentsCollapsed((v) => !v)}
+      />
       <button className="reset" onClick={reset} aria-label="Reset demo">
         Reset
       </button>

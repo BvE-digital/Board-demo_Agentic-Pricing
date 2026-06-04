@@ -12,7 +12,16 @@ function sortKey(row) {
 }
 
 // Bottom band: the 50-line evidence table, fades in at Phase 5 (FR-5).
-export default function ResultsTable({ rows, visible }) {
+// The toolbar lets the presenter fold the navy "today's update" band and/or the
+// agent summaries away, so the table can fill (more of) the screen.
+export default function ResultsTable({
+  rows,
+  visible,
+  orchCollapsed = false,
+  agentsCollapsed = false,
+  onToggleOrch,
+  onToggleAgents,
+}) {
   const sorted = useMemo(
     () => [...rows].sort((a, b) => sortKey(a) - sortKey(b)),
     [rows],
@@ -20,6 +29,27 @@ export default function ResultsTable({ rows, visible }) {
 
   return (
     <section className={visible ? 'results visible' : 'results'}>
+      <div className="results-toolbar">
+        <span className="results-title">Portfolio · 50 ingredient lines</span>
+        <div className="view-toggles">
+          <button
+            type="button"
+            className={orchCollapsed ? 'view-toggle off' : 'view-toggle'}
+            onClick={onToggleOrch}
+            aria-pressed={!orchCollapsed}
+          >
+            {orchCollapsed ? '▸' : '▾'} Today’s update
+          </button>
+          <button
+            type="button"
+            className={agentsCollapsed ? 'view-toggle off' : 'view-toggle'}
+            onClick={onToggleAgents}
+            aria-pressed={!agentsCollapsed}
+          >
+            {agentsCollapsed ? '▸' : '▾'} Agent summaries
+          </button>
+        </div>
+      </div>
       <div className="results-scroll">
         <table className="results-table">
           <thead>

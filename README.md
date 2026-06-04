@@ -27,6 +27,11 @@ The story runs in five phases over ~33 seconds:
 
 ---
 
+## Documentation
+
+The full product requirements are in [`docs/PRD.md`](docs/PRD.md) — the v2.0
+board-showcase spec this demo is built against.
+
 ## Prerequisites
 
 - **Node 18+** and **npm**

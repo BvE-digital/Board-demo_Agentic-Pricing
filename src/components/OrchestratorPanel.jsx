@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Logo from './Logo.jsx';
 import ProgressBar from './ProgressBar.jsx';
 import { TIMING } from '../simulation/TIMING_CONFIG.js';
 import { AGENT_ORDER, AGENTS } from '../data/agentScripts.js';
@@ -38,7 +39,7 @@ export default function OrchestratorPanel({
 
       <div className="orch-inner">
         <div className="orch-head">
-          <span className="wordmark wordmark-on-navy">NUTRECO</span>
+          <Logo onNavy />
           <span className="orch-tag">ORCHESTRATOR</span>
         </div>
 

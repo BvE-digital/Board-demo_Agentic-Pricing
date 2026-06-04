@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import Logo from './Logo.jsx';
 
 // Suggested prompts (FR-1). Clicking a chip fills the field and submits in a
 // single interaction (AC-2) so Petra never has to type.
@@ -31,7 +32,7 @@ export default function ChatTrigger({ onSubmit }) {
   return (
     <div className="chat">
       <header className="topbar">
-        <span className="wordmark">NUTRECO</span>
+        <Logo />
       </header>
 
       <main className="chat-main">

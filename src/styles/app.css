@@ -6,14 +6,24 @@
 
 /* ---------- Shared ---------- */
 
-.wordmark {
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  color: var(--brand-navy);
-  font-size: 18px;
+/* Brand logo (Nutreco). Sits directly on white in the chat header; on the navy
+   orchestrator bar it gets a white tile so the navy wordmark stays legible. */
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
 }
-.wordmark-on-navy {
-  color: var(--text-on-navy);
+.brand-logo img {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+.brand-logo.on-navy {
+  background: var(--surface-card);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.brand-logo.on-navy img {
+  height: 20px;
 }
 
 .topbar {

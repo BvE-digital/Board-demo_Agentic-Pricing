@@ -1,0 +1,577 @@
+/* =============================================================================
+   app.css — layout and component styling for the demo.
+   Two states: the opening chat interface, and the three-band demo view.
+   All animation easing is `ease` / `ease-out`; no bounce, no hover transforms.
+   ========================================================================== */
+
+/* ---------- Shared ---------- */
+
+.wordmark {
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--brand-navy);
+  font-size: 18px;
+}
+.wordmark-on-navy {
+  color: var(--text-on-navy);
+}
+
+.topbar {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  background: var(--surface-card);
+  border-bottom: var(--border-style);
+  flex: none;
+}
+
+/* Blinking caret used by both typewriter effects. */
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 1px;
+  background: currentColor;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* =============================================================================
+   Opening state — full-screen chat interface (FR-1)
+   ========================================================================== */
+
+.chat {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.chat-title {
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 28px;
+  text-align: center;
+}
+
+.chat-input-row {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.chat-input {
+  flex: 1;
+  height: 52px;
+  padding: 0 18px;
+  font-size: 16px;
+  color: var(--text-primary);
+  background: var(--surface-card);
+  border: var(--border-style);
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 150ms ease;
+}
+.chat-input:focus {
+  border-color: var(--brand-blue-mid);
+}
+
+.send-btn {
+  height: 52px;
+  width: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: var(--brand-magenta);
+  border: none;
+  border-radius: var(--radius);
+  transition: filter 150ms ease;
+}
+.send-btn:hover {
+  filter: brightness(1.08);
+}
+
+.chips {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.chip {
+  padding: 9px 14px;
+  font-size: 13px;
+  color: var(--text-primary);
+  background: var(--surface-card);
+  border: var(--border-style);
+  border-radius: 999px;
+  transition: border-color 150ms ease, color 150ms ease;
+}
+.chip:hover {
+  border-color: var(--brand-magenta);
+  color: var(--brand-magenta);
+}
+
+/* =============================================================================
+   Demo state — three horizontal bands (Design Spec → Layout)
+   ========================================================================== */
+
+.demo {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* single viewport, no scroll during the presentation */
+}
+
+/* ---------- Band 1: Orchestrator (navy, ~18vh) ---------- */
+
+.orchestrator {
+  flex: none;
+  height: 18vh;
+  min-height: 132px;
+  background: var(--brand-navy);
+  color: var(--text-on-navy);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.progress-track {
+  height: 4px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.16);
+  flex: none;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--brand-lime);
+  transition: width 80ms linear;
+}
+
+.orch-inner {
+  flex: 1;
+  padding: 14px 28px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.orch-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 8px;
+  flex: none;
+}
+.orch-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--brand-lime);
+}
+
+.orch-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.orch-prompt {
+  font-size: 17px;
+  font-weight: 500;
+  margin: 0;
+  color: var(--text-on-navy);
+}
+.orch-quote {
+  color: var(--brand-blue-mid);
+}
+.orch-status {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--brand-blue-mid);
+  animation: fade-in 200ms ease;
+}
+
+/* Convergence: findings flow in, summary types out. */
+.converge-cards {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex: none;
+}
+.converge-pill {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: var(--text-primary);
+  animation: flow-in 400ms ease;
+}
+.converge-pill.sev-protected {
+  background: var(--finding-protected);
+}
+.converge-pill.sev-monitor {
+  background: var(--finding-monitor);
+}
+.converge-pill.sev-escalate {
+  background: var(--finding-escalate);
+}
+
+.orch-summary {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-on-navy);
+  overflow-y: auto;
+}
+
+/* ---------- Band 2: Agent row (~42vh) ---------- */
+
+.agent-row {
+  flex: none;
+  height: 42vh;
+  display: flex;
+  gap: 14px;
+  padding: 16px 28px;
+  background: var(--surface);
+}
+
+.agent-panel {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-card);
+  border: var(--border-style);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px;
+  opacity: 0.55;
+  transform: translateY(6px);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.agent-panel.running,
+.agent-panel.complete {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.agent-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  flex: none;
+  padding-bottom: 10px;
+  border-bottom: var(--border-style);
+}
+.agent-name {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--brand-navy);
+}
+.agent-role {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.agent-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  white-space: nowrap;
+}
+.status-label {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex: none;
+}
+.dot-idle {
+  background: #cbd5e1;
+}
+.dot-running {
+  background: var(--brand-lime);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+.dot-complete {
+  background: var(--brand-navy);
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.agent-log {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.log-line {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text-muted);
+  animation: fade-in 150ms ease;
+}
+
+.intermediate {
+  flex: none;
+  margin-top: 8px;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--brand-blue-mid);
+  padding-left: 8px;
+  border-left: 2px solid var(--brand-blue-mid);
+  animation: slide-in 200ms ease;
+}
+
+.finding-slot {
+  flex: none;
+  margin-top: 8px;
+  transition: transform 400ms ease, opacity 400ms ease;
+}
+.finding-slot.flowing {
+  transform: translateY(-6px) scale(0.985);
+  opacity: 0.9;
+}
+
+.finding-card {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text-primary);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  animation: lock-flash 300ms ease;
+}
+.finding-card.sev-protected {
+  background: var(--finding-protected);
+}
+.finding-card.sev-monitor {
+  background: var(--finding-monitor);
+}
+.finding-card.sev-escalate {
+  background: var(--finding-escalate);
+}
+@keyframes lock-flash {
+  0% {
+    border-color: var(--brand-lime);
+    transform: scale(0.99);
+  }
+  100% {
+    border-color: transparent;
+    transform: scale(1);
+  }
+}
+
+/* ---------- Band 3: Results table (~40vh) ---------- */
+
+.results {
+  flex: 1;
+  min-height: 0;
+  padding: 0 28px 20px;
+  background: var(--surface);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms ease;
+}
+.results.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.results-scroll {
+  height: 100%;
+  overflow-y: auto;
+  background: var(--surface-card);
+  border: var(--border-style);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.results-table th {
+  position: sticky;
+  top: 0;
+  background: var(--surface-navy-light);
+  color: var(--brand-navy);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: var(--border-style);
+  z-index: 1;
+}
+.results-table td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.results-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.cell-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.cell-agent {
+  color: var(--text-muted);
+}
+
+.row-escalate {
+  background: var(--finding-escalate);
+}
+.row-escalate .cell-name {
+  color: var(--brand-magenta);
+}
+
+.chip-pos {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.chip-pos.in {
+  background: var(--finding-protected);
+  color: #5a6e0f;
+}
+.chip-pos.cost {
+  background: var(--finding-monitor);
+  color: #8a6d00;
+}
+
+.exposure {
+  font-weight: 600;
+}
+.exp-high {
+  color: var(--brand-magenta);
+}
+.exp-medium {
+  color: #b06a00;
+}
+.exp-low {
+  color: var(--brand-blue-mid);
+}
+.exp-none {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.action {
+  font-weight: 500;
+}
+.act-escalate {
+  color: var(--brand-magenta);
+  font-weight: 600;
+}
+.act-reprice {
+  color: #b06a00;
+}
+.act-monitor {
+  color: var(--brand-blue-mid);
+}
+.act-hold {
+  color: var(--text-muted);
+}
+
+/* ---------- Reset button (discreet, bottom-right) (FR-7) ---------- */
+
+.reset {
+  position: fixed;
+  bottom: 14px;
+  right: 16px;
+  font-size: 11px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.8);
+  border: var(--border-style);
+  border-radius: var(--radius);
+  padding: 5px 12px;
+  opacity: 0.5;
+  transition: opacity 150ms ease;
+  z-index: 10;
+}
+.reset:hover {
+  opacity: 1;
+}
+
+/* ---------- Keyframes ---------- */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes flow-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

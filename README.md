@@ -115,11 +115,32 @@ The 50 ingredient lines live in **`src/data/ingredients.json`**. Each line has:
 | `contractRenewalDays` | 67 |
 | `linkedFormulations` | `["Trouw Broiler P3", "Skretting Atlantic"]` |
 | `exposure` | None / Low / Medium / High |
-| `action` | Hold / Monitor / Reprice / Escalate |
+| `action` | Maintain / Monitor / Reprice / Escalate |
 | `agent` | Exposure / Position / Cost Guidance / Contract |
 
 All agent log lines, intermediate findings, key findings and the orchestrator
 summary are authored copy in **`src/data/agentScripts.js`**.
+
+## Domain notes (this is a pricing platform, not a trading platform)
+
+Every ingredient line is a **sales item offered to customers**, so the system
+recommends a *pricing* action, not a trading/position decision. The action set:
+
+| Action | Meaning |
+|---|---|
+| **Maintain** | Cost is unaffected or covered — current price guidance stands. |
+| **Monitor** | Indirectly exposed — watch and review at the next window. |
+| **Reprice** | Cost has moved — update price guidance now. |
+| **Escalate** | Contract-ceiling breach or a customer contract now below cost — needs review before the next window. |
+
+Two cost concepts drive the Cost Guidance and Contract agents:
+
+- **RMMC Guidance** — the estimated average contract cost of competition for a
+  raw material, built from our best estimate of purchase prices across both
+  covered and open positions, for a region over a period. (Competitive benchmark.)
+- **Contract Cost Guidance** — the estimated cost at which we expect to purchase
+  the material in a given month: landed cost, weighted-average across all OpCos
+  within the region. (Our own cost build-up.)
 
 ## Reset
 

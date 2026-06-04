@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 // descending (FR-5). Sort is computed once on load; the table is not
 // interactive, to avoid accidental state changes mid-presentation.
 const EXPOSURE_RANK = { High: 0, Medium: 1, Low: 2, None: 3 };
-const ACTION_RANK = { Escalate: 0, Reprice: 1, Monitor: 2, Hold: 3 };
+const ACTION_RANK = { Escalate: 0, Reprice: 1, Monitor: 2, Maintain: 3 };
 
 function sortKey(row) {
   const escalate = row.action === 'Escalate' ? 0 : 1;

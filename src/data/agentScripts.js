@@ -56,7 +56,7 @@ export const AGENTS = {
       'First pass: majority of direct-linked lines appear covered — COST_PLUS exposure concentrated in amino acids and specialty oilseeds',
     finding: {
       severity: 'protected',
-      text: '12 of 18 direct-linked lines are IN_POSITION and protected. 6 cost-plus lines are fully exposed to spot movement. No additional cover available.',
+      text: '12 of 18 direct-linked lines are IN_POSITION and protected — current price guidance holds. 6 cost-plus lines are fully exposed to the cost increase. No additional cover available.',
     },
   },
 
@@ -65,46 +65,46 @@ export const AGENTS = {
     role: 'Recalculates guidance for cost-plus lines',
     shortName: 'Cost',
     logLines: [
-      'Loading current RMMC benchmarks for 18 cost-plus lines...',
-      'Applying +8% futures delta to base cost model...',
+      'Loading RMMC guidance (regional competitive benchmark) for 18 cost-plus lines...',
+      'Rebuilding contract cost guidance — landed cost, weighted across OpCos...',
+      'Applying +8% raw material delta to the cost build-up...',
       'Adjusting for freight index (FOB Rotterdam, current week)...',
-      'Recalculating expected landed cost per line...',
-      'Average guidance adjustment: +4.2% across affected lines',
-      '3 lines exceed contract ceiling post-adjustment...',
-      'Flagging for escalation — ceiling breach confirmed.',
+      'Average contract cost guidance moves +4.2% across affected lines',
+      'Comparing updated guidance against RMMC and contract ceilings...',
+      '3 lines exceed contract ceiling post-adjustment — flagging for escalation.',
       'Updated cost guidance prepared for sales distribution.',
     ],
     intermediate:
-      'Preliminary: cost guidance will move +3.8–5.1% across most cost-plus lines — 3 lines approaching contract ceiling',
+      'Preliminary: contract cost guidance will move +3.8–5.1% across most cost-plus lines — 3 lines approaching contract ceiling',
     finding: {
       severity: 'escalate',
-      text: '18 cost-plus lines require updated guidance. Average increase: +4.2%. 3 lines breach contract ceiling and need escalation before the next pricing window.',
+      text: '18 cost-plus lines require updated contract cost guidance. Average increase: +4.2%, tracking above RMMC. 3 lines breach contract ceiling and need escalation before the next pricing window.',
     },
   },
 
   contract: {
     name: 'Contract Agent',
-    role: 'Flags contracts now below cost guidance',
+    role: 'Flags customer contracts now below cost guidance',
     shortName: 'Contract',
     logLines: [
-      'Scanning active contracts linked to 30 exposed lines...',
-      'Filtering for renewal dates within 90 days...',
-      '9 contracts identified within renewal window...',
-      'Comparing current contract price to updated cost guidance...',
-      '4 contracts now priced below updated cost floor...',
-      'Assessing renegotiation urgency by volume and margin...',
+      'Scanning active customer contracts linked to 30 exposed lines...',
+      'Filtering for repricing dates within 90 days...',
+      '9 contracts identified within the repricing window...',
+      'Comparing contracted sell price to updated cost guidance...',
+      '4 contracts now priced below updated cost — margin underwater...',
+      'Assessing repricing urgency by volume and margin...',
       'Escalation priority assigned: 2 high, 2 medium.',
-      'Contract risk report prepared.',
+      'Contract margin report prepared for the commercial team.',
     ],
     intermediate:
-      'Early flag: at least 4 contracts appear to be below the updated cost floor — volume-weighted impact being calculated',
+      'Early flag: at least 4 customer contracts appear to be below updated cost guidance — volume-weighted margin impact being calculated',
     finding: {
       severity: 'escalate',
-      text: '9 contracts renew within 90 days. 4 are now underwater relative to updated guidance. 2 require immediate procurement review; 2 can wait until next cycle.',
+      text: '9 customer contracts reprice within 90 days. 4 are now priced below updated cost guidance (margin underwater). 2 need immediate commercial review; 2 can wait until next cycle.',
     },
   },
 };
 
 // Phase 4 — pre-scripted orchestrator convergence summary (FR-6).
 export const ORCHESTRATOR_SUMMARY =
-  'Soybean futures moved +8% this morning. The system assessed all 50 ingredient lines across four dimensions simultaneously. Thirty lines carry direct or indirect exposure. Twelve are protected by current inventory positions and need no action today. The remaining 18 cost-plus lines require updated cost guidance before the next pricing window opens. Four contracts are now priced below updated guidance and should reach procurement by end of week. No manual triage was needed. Total assessment time: 28 seconds.';
+  'Soybean futures moved +8% this morning. The system assessed all 50 ingredient lines across four dimensions simultaneously. Thirty lines carry direct or indirect exposure. Twelve are protected by current inventory positions and hold their existing price guidance. The remaining 18 cost-plus lines require updated cost guidance before the next pricing window opens. Four customer contracts are now priced below updated cost guidance and should reach the commercial desk by end of week. No manual triage was needed. Total assessment time: 28 seconds.';

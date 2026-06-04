@@ -6,24 +6,21 @@
 
 /* ---------- Shared ---------- */
 
-/* Brand logo (Nutreco). Sits directly on white in the chat header; on the navy
-   orchestrator bar it gets a white tile so the navy wordmark stays legible. */
+/* Brand logo (Nutreco). Shown in full colour on the white chat header. On the
+   navy orchestrator bar it is reversed to solid white (no background tile) —
+   the standard treatment for a logo on a dark surface. */
 .brand-logo {
   display: inline-flex;
   align-items: center;
 }
 .brand-logo img {
-  height: 28px;
+  height: 30px;
   width: auto;
   display: block;
 }
-.brand-logo.on-navy {
-  background: var(--surface-card);
-  padding: 5px 10px;
-  border-radius: 5px;
-}
 .brand-logo.on-navy img {
-  height: 20px;
+  height: 24px;
+  filter: brightness(0) invert(1);
 }
 
 .topbar {

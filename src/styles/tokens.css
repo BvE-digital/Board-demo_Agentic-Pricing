@@ -1,0 +1,59 @@
+/* =============================================================================
+   tokens.css — brand colours, surfaces and base typography (Design Spec).
+   Every colour the demo uses is a custom property defined here.
+   ========================================================================== */
+
+:root {
+  /* Brand */
+  --brand-navy: #07427c;
+  --brand-lime: #becd34;
+  --brand-magenta: #c70c6f;
+  --brand-blue-mid: #6a8ccb;
+
+  /* Surfaces */
+  --surface: #f4f5f7;
+  --surface-card: #ffffff;
+  --surface-navy-light: #e8eef5;
+  --border: #dde1e7;
+
+  /* Text */
+  --text-primary: #0f172a;
+  --text-muted: #64748b;
+  --text-on-navy: #ffffff;
+
+  /* Finding card backgrounds */
+  --finding-protected: #f0f7e6;
+  --finding-monitor: #fff8e6;
+  --finding-escalate: #fbe8f0;
+
+  /* Structure */
+  --radius: 6px;
+  --border-style: 1px solid var(--border);
+  --shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  background: var(--surface);
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}

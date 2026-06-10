@@ -22,7 +22,7 @@ export const AGENTS = {
     logLines: [
       'Connecting to commodity index feed...',
       'Loading 50 ingredient lines from portfolio registry...',
-      'Scanning for soybean linkage — direct and indirect...',
+      'Scanning for soybean linkage, direct and indirect...',
       'Oilseed category: 18 lines flagged as directly linked',
       'Grain co-products: cross-referencing CBOT correlation data...',
       '12 grain-linked lines added to exposure set',
@@ -31,7 +31,7 @@ export const AGENTS = {
       'Exposure scoring complete.',
     ],
     intermediate:
-      'Early read: 26 of 50 lines show price sensitivity above threshold — oilseed category dominant',
+      'Early read: 26 of 50 lines show price sensitivity above threshold, concentrated in oilseeds.',
     finding: {
       severity: 'monitor',
       text: '30 lines carry exposure to this futures movement. 18 direct (oilseed), 12 indirect (grain co-products). 20 lines unaffected.',
@@ -46,17 +46,17 @@ export const AGENTS = {
       'Pulling current inventory positions for 30 exposed lines...',
       'Checking stock cover in days against standard threshold (30d)...',
       '18 direct-linked lines assessed...',
-      '12 lines: IN_POSITION — average cover 38 days',
+      '12 lines: IN_POSITION, average cover 38 days',
       '6 lines: COST_PLUS with no forward cover',
       'Cross-checking against open purchase orders...',
       'No additional cover identified for COST_PLUS lines.',
       'Position assessment complete.',
     ],
     intermediate:
-      'First pass: majority of direct-linked lines appear covered — COST_PLUS exposure concentrated in amino acids and specialty oilseeds',
+      'First pass: most direct-linked lines look covered. COST_PLUS exposure sits in amino acids and specialty oilseeds.',
     finding: {
       severity: 'protected',
-      text: '12 of 18 direct-linked lines are IN_POSITION and protected — current price guidance holds. 6 cost-plus lines are fully exposed to the cost increase. No additional cover available.',
+      text: '12 of 18 direct-linked lines are IN_POSITION and protected, so current price guidance holds. The other 6 cost-plus lines are fully exposed to the cost increase, with no additional cover available.',
     },
   },
 
@@ -66,16 +66,16 @@ export const AGENTS = {
     shortName: 'Cost',
     logLines: [
       'Loading RMMC guidance (regional competitive benchmark) for 18 cost-plus lines...',
-      'Rebuilding contract cost guidance — landed cost, weighted across OpCos...',
+      'Rebuilding contract cost guidance: landed cost, weighted across OpCos...',
       'Applying +8% raw material delta to the cost build-up...',
       'Adjusting for freight index (FOB Rotterdam, current week)...',
       'Average contract cost guidance moves +4.2% across affected lines',
       'Comparing updated guidance against RMMC and contract ceilings...',
-      '3 lines exceed contract ceiling post-adjustment — flagging for escalation.',
+      '3 lines exceed contract ceiling after adjustment. Flagging for escalation.',
       'Updated cost guidance prepared for sales distribution.',
     ],
     intermediate:
-      'Preliminary: contract cost guidance will move +3.8–5.1% across most cost-plus lines — 3 lines approaching contract ceiling',
+      'Preliminary: contract cost guidance moves +3.8% to +5.1% across most cost-plus lines. 3 lines are approaching their contract ceiling.',
     finding: {
       severity: 'escalate',
       text: '18 cost-plus lines require updated contract cost guidance. Average increase: +4.2%, tracking above RMMC. 3 lines breach contract ceiling and need escalation before the next pricing window.',
@@ -91,13 +91,13 @@ export const AGENTS = {
       'Filtering for repricing dates within 90 days...',
       '9 contracts identified within the repricing window...',
       'Comparing contracted sell price to updated cost guidance...',
-      '4 contracts now priced below updated cost — margin underwater...',
+      '4 contracts now priced below updated cost, margin underwater...',
       'Assessing repricing urgency by volume and margin...',
       'Escalation priority assigned: 2 high, 2 medium.',
       'Contract margin report prepared for the commercial team.',
     ],
     intermediate:
-      'Early flag: at least 4 customer contracts appear to be below updated cost guidance — volume-weighted margin impact being calculated',
+      'Early flag: at least 4 customer contracts sit below updated cost guidance. Calculating the volume-weighted margin impact.',
     finding: {
       severity: 'escalate',
       text: '9 customer contracts reprice within 90 days. 4 are now priced below updated cost guidance (margin underwater). 2 need immediate commercial review; 2 can wait until next cycle.',
@@ -109,4 +109,4 @@ export const AGENTS = {
 // read like a pricing analyst's real-time recommendation: what moved, what is
 // covered, where the pressure is, and a clear call to act.
 export const ORCHESTRATOR_SUMMARY =
-  'Soybean futures opened +8% this morning, and the move runs through 30 of our 50 lines — 18 directly across the oilseed complex, 12 indirectly via grain co-products. Twelve of the directly-linked lines are well covered, averaging 38 days of stock, so their price guidance holds for now. The pressure is on the 18 cost-plus lines: updated contract cost guidance comes in at +4.2% on average, just above the RMMC benchmark, and three lines breach their contract ceiling — those need a pricing call before this afternoon’s window. On the commercial side, four customer contracts are now selling below refreshed cost; two carry enough volume to escalate today, the other two can wait for the next cycle. Recommendation: clear the three ceiling breaches and the two underwater contracts now, reprice the remaining cost-plus lines into the next window, and hold the covered and unaffected lines as they are. Fifty lines assessed in 28 seconds, no manual triage.';
+  'Soybean futures opened +8% this morning, and the move runs through 30 of our 50 lines: 18 directly across the oilseed complex and 12 indirectly through grain co-products. Twelve of the directly linked lines are well covered, averaging 38 days of stock, so their price guidance holds for now. The pressure sits on the 18 cost-plus lines. Updated contract cost guidance comes in at +4.2% on average, just above the RMMC benchmark, and three lines breach their contract ceiling. Those need a pricing call before this afternoon’s window. On the commercial side, four customer contracts are now selling below refreshed cost. Two carry enough volume to escalate today, and the other two can wait for the next cycle. Recommendation: clear the three ceiling breaches and the two underwater contracts now, reprice the remaining cost-plus lines into the next window, and hold the covered and unaffected lines where they are. Fifty lines assessed in 28 seconds, with no manual triage.';

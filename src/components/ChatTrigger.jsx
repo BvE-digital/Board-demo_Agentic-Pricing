@@ -4,7 +4,7 @@ import Logo from './Logo.jsx';
 // Suggested prompts (FR-1). Clicking a chip fills the field and submits in a
 // single interaction (AC-2) so Petra never has to type.
 const CHIPS = [
-  'Soybean futures spiked 8% — assess our exposure',
+  'Soybean futures spiked 8%. Assess our exposure.',
   'Run a full portfolio cost review',
   'Which contracts are at risk this quarter?',
 ];

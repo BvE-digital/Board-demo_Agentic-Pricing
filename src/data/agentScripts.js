@@ -105,6 +105,8 @@ export const AGENTS = {
   },
 };
 
-// Phase 4 — pre-scripted orchestrator convergence summary (FR-6).
+// Phase 4 — pre-scripted orchestrator convergence summary (FR-6). Written to
+// read like a pricing analyst's real-time recommendation: what moved, what is
+// covered, where the pressure is, and a clear call to act.
 export const ORCHESTRATOR_SUMMARY =
-  'Soybean futures moved +8% this morning. The system assessed all 50 ingredient lines across four dimensions simultaneously. Thirty lines carry direct or indirect exposure. Twelve are protected by current inventory positions and hold their existing price guidance. The remaining 18 cost-plus lines require updated cost guidance before the next pricing window opens. Four customer contracts are now priced below updated cost guidance and should reach the commercial desk by end of week. No manual triage was needed. Total assessment time: 28 seconds.';
+  'Soybean futures opened +8% this morning, and the move runs through 30 of our 50 lines — 18 directly across the oilseed complex, 12 indirectly via grain co-products. Twelve of the directly-linked lines are well covered, averaging 38 days of stock, so their price guidance holds for now. The pressure is on the 18 cost-plus lines: updated contract cost guidance comes in at +4.2% on average, just above the RMMC benchmark, and three lines breach their contract ceiling — those need a pricing call before this afternoon’s window. On the commercial side, four customer contracts are now selling below refreshed cost; two carry enough volume to escalate today, the other two can wait for the next cycle. Recommendation: clear the three ceiling breaches and the two underwater contracts now, reprice the remaining cost-plus lines into the next window, and hold the covered and unaffected lines as they are. Fifty lines assessed in 28 seconds, no manual triage.';

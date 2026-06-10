@@ -166,6 +166,12 @@
   overflow: hidden;
   transition: flex-grow 350ms ease, flex-basis 350ms ease, min-height 350ms ease;
 }
+/* When the recommendation appears it is the first thing to read, so the band
+   grows to give it room without scrolling. */
+.orchestrator.summary-open {
+  flex: 42 1 0;
+  min-height: 220px;
+}
 .orchestrator.collapsed {
   flex: 0 0 42px;
   min-height: 0;
@@ -257,8 +263,9 @@
 
 .orch-summary {
   margin: 0;
+  max-width: 78ch;
   font-size: 15px;
-  line-height: 1.7;
+  line-height: 1.65;
   color: var(--text-on-navy);
   overflow-y: auto;
 }

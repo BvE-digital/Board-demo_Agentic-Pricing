@@ -43,7 +43,7 @@ export const TIMING = {
   convergenceDelay: 1500,
 
   // Phase 4 — orchestrator summary reveal speed.
-  summaryWordDelay: 60, // ms per word
+  summaryWordDelay: 45, // ms per word
 
   // Phase 5 — pause after the summary finishes before the results table fades in.
   tableDelay: 500,

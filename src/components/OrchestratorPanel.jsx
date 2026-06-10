@@ -45,7 +45,7 @@ export default function OrchestratorPanel({
   }
 
   return (
-    <section className="orchestrator">
+    <section className={converged ? 'orchestrator summary-open' : 'orchestrator'}>
       <ProgressBar progress={progress} />
 
       <div className="orch-inner">

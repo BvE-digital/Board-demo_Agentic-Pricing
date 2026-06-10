@@ -23,10 +23,11 @@ export default function App() {
   const [converged, setConverged] = useState(false);
   const [summaryWordCount, setSummaryWordCount] = useState(0);
   const [showTable, setShowTable] = useState(false);
-  // Post-run view controls: fold the navy "today's update" band and/or the
-  // agent summaries away so the results table can fill (more of) the screen.
+  // Accordion: each band folds in/out independently via its bottom chevron, so
+  // the CDO can read one section at a time or have them all folded out.
   const [orchCollapsed, setOrchCollapsed] = useState(false);
   const [agentsCollapsed, setAgentsCollapsed] = useState(false);
+  const [tableCollapsed, setTableCollapsed] = useState(false);
   const cleanupRef = useRef(null);
 
   const patchAgent = (id, patch) =>
@@ -70,6 +71,7 @@ export default function App() {
     setShowTable(false);
     setOrchCollapsed(false);
     setAgentsCollapsed(false);
+    setTableCollapsed(false);
   }, []);
 
   if (view === 'chat') {
@@ -86,20 +88,20 @@ export default function App() {
         agents={agents}
         summary={ORCHESTRATOR_SUMMARY}
         summaryWordCount={summaryWordCount}
-        collapsed={showTable && orchCollapsed}
+        collapsed={orchCollapsed}
+        onToggle={() => setOrchCollapsed((v) => !v)}
       />
       <AgentRow
         agents={agents}
         converged={converged}
-        collapsed={showTable && agentsCollapsed}
+        collapsed={agentsCollapsed}
+        onToggle={() => setAgentsCollapsed((v) => !v)}
       />
       <ResultsTable
         rows={ingredients}
         visible={showTable}
-        orchCollapsed={orchCollapsed}
-        agentsCollapsed={agentsCollapsed}
-        onToggleOrch={() => setOrchCollapsed((v) => !v)}
-        onToggleAgents={() => setAgentsCollapsed((v) => !v)}
+        collapsed={tableCollapsed}
+        onToggle={() => setTableCollapsed((v) => !v)}
       />
       <button className="reset" onClick={reset} aria-label="Reset demo">
         Reset

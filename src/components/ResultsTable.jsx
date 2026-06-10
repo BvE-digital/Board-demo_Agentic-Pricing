@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import BandHandle from './BandHandle.jsx';
 
 // Sort ranks: Escalate rows float to the very top, then by exposure severity
 // descending (FR-5). Sort is computed once on load; the table is not
@@ -12,44 +13,23 @@ function sortKey(row) {
 }
 
 // Bottom band: the 50-line evidence table, fades in at Phase 5 (FR-5).
-// The toolbar lets the presenter fold the navy "today's update" band and/or the
-// agent summaries away, so the table can fill (more of) the screen.
-export default function ResultsTable({
-  rows,
-  visible,
-  orchCollapsed = false,
-  agentsCollapsed = false,
-  onToggleOrch,
-  onToggleAgents,
-}) {
+// Folds in/out via the bottom-centre chevron like the other two bands.
+export default function ResultsTable({ rows, visible, collapsed = false, onToggle }) {
   const sorted = useMemo(
     () => [...rows].sort((a, b) => sortKey(a) - sortKey(b)),
     [rows],
   );
 
+  if (visible && collapsed) {
+    return (
+      <section className="results visible collapsed">
+        <BandHandle collapsed onToggle={onToggle} label="Portfolio · 50 lines" />
+      </section>
+    );
+  }
+
   return (
     <section className={visible ? 'results visible' : 'results'}>
-      <div className="results-toolbar">
-        <span className="results-title">Portfolio · 50 ingredient lines</span>
-        <div className="view-toggles">
-          <button
-            type="button"
-            className={orchCollapsed ? 'view-toggle off' : 'view-toggle'}
-            onClick={onToggleOrch}
-            aria-pressed={!orchCollapsed}
-          >
-            {orchCollapsed ? '▸' : '▾'} Today’s update
-          </button>
-          <button
-            type="button"
-            className={agentsCollapsed ? 'view-toggle off' : 'view-toggle'}
-            onClick={onToggleAgents}
-            aria-pressed={!agentsCollapsed}
-          >
-            {agentsCollapsed ? '▸' : '▾'} Agent summaries
-          </button>
-        </div>
-      </div>
       <div className="results-scroll">
         <table className="results-table">
           <thead>
@@ -91,6 +71,8 @@ export default function ResultsTable({
           </tbody>
         </table>
       </div>
+
+      <BandHandle collapsed={false} onToggle={onToggle} label="Portfolio · 50 lines" />
     </section>
   );
 }

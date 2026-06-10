@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Logo from './Logo.jsx';
 import ProgressBar from './ProgressBar.jsx';
+import BandHandle from './BandHandle.jsx';
 import { TIMING } from '../simulation/TIMING_CONFIG.js';
 import { AGENT_ORDER, AGENTS } from '../data/agentScripts.js';
 
@@ -15,6 +16,7 @@ export default function OrchestratorPanel({
   summary,
   summaryWordCount,
   collapsed = false,
+  onToggle,
 }) {
   const [typed, setTyped] = useState('');
 
@@ -34,8 +36,16 @@ export default function OrchestratorPanel({
   const summaryText = summary.split(' ').slice(0, summaryWordCount).join(' ');
   const summaryDone = summaryWordCount >= summary.split(' ').length;
 
+  if (collapsed) {
+    return (
+      <section className="orchestrator collapsed">
+        <BandHandle collapsed onToggle={onToggle} label="Today’s update" onNavy />
+      </section>
+    );
+  }
+
   return (
-    <section className={collapsed ? 'orchestrator collapsed' : 'orchestrator'}>
+    <section className="orchestrator">
       <ProgressBar progress={progress} />
 
       <div className="orch-inner">
@@ -77,6 +87,8 @@ export default function OrchestratorPanel({
           </div>
         )}
       </div>
+
+      <BandHandle collapsed={false} onToggle={onToggle} label="Today’s update" onNavy />
     </section>
   );
 }
